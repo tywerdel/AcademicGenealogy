@@ -113,7 +113,7 @@ Dunlap [label = 'Donald G. Dunlap\nField: Ecology\nFine scale habitat selection'
         URL = 'https://www.journals.uchicago.edu/doi/pdf/10.1086/physzool.41.4.30155478?casa_token=B2u3vcYQo1MAAAAA:DxNgMF23SybevWfO-9y1heyEWvb9hOJ0Ykwk57xkq5TQ7-05lhy4G7U6vkes8s6_GfKWsh80VF9i', 
         target = '_blank', color = '#D3A561', fillcolor = '#2e8b57', fontcolor = '#FAFAD2']
 
-Leopold [label = 'Aldo Leopold\nField: Conservation Biology\nLand Ethic, A Sand County Almanac', 
+Leopold [label = 'Aldo Leopold\nField: Wildlife Management\nLand Ethic, A Sand County Almanac', 
          tooltip = 'Father of Wildlife Conservation', 
          URL = 'https://en.wikipedia.org/wiki/Aldo_Leopold', 
          target = '_blank', color = '#D3A561', fillcolor = '#2e8b57', fontcolor = '#FAFAD2']
@@ -216,6 +216,8 @@ Jenks -> Werdel [penwidth = 2]
 
   }
 ")
+
+genealogy_diagram
 
 # Export as an HTML file using htmlwidgets
 htmlwidgets::saveWidget(genealogy_diagram, file = "academic_genealogy.html")
