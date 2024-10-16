@@ -1,6 +1,7 @@
 library(DiagrammeR)
+library(htmlwidgets)
 
-grViz("
+genealogy_diagram <- grViz("
   digraph hierarchical_diagram {
 
     # Node defaults with subtle gradients, hover effects, and adjusted font size
@@ -215,3 +216,6 @@ Jenks -> Werdel [penwidth = 2]
 
   }
 ")
+
+# Export as an HTML file using htmlwidgets
+htmlwidgets::saveWidget(genealogy_diagram, file = "academic_genealogy.html")
