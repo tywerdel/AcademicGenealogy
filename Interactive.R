@@ -5,11 +5,14 @@ library(htmltools)
 genealogy_diagram <- grViz("
   digraph hierarchical_diagram {
 
+    # Edge styling and interactivity
+    edge [penwidth = 1.5, color = '#8B7765', style = solid, arrowsize=0.2]
+
     # Node defaults with subtle gradients, hover effects, and adjusted font size
     node [fontname = Helvetica, shape = box, style = 'filled,rounded', penwidth = 2, fontsize=6, margin='0.03,0.01']
     
     # Graph attributes for spacing
-    graph [ranksep=.5, nodesep=0.1]
+    graph [ranksep=.25, nodesep=0.1]
     
    # Level 1: Scientific Legends
     Pinchot [label = 'Gifford Pinchot\nSilviculture\nAmerican Forestry', 
@@ -179,8 +182,7 @@ Werdel [label = 'Ty J. Werdel\nWildlife Ecology\nPrairie Ecosystems',
         URL = 'https://rwfm.tamu.edu/people/werdel-ty/', 
         target = '_blank', color = '#6B5B4B', fillcolor = '#deb887']
 
-# Edge styling and interactivity
-edge [penwidth = 1.5, color = '#8B7765', style = solid, arrowsize=0.2]
+
 
 # Define edges connecting nodes
 Mark -> Bigelow
@@ -220,22 +222,17 @@ Jenks -> Werdel
 
 genealogy_diagram
 
-# Modify widget to scale based on viewport using CSS
-scaled_widget <- genealogy_diagram
+# Modify widget to fit 100% width and height using custom CSS
+full_screen_widget <- genealogy_diagram
 
-# Use prependContent to add custom scaling CSS to fit within window
-scaled_widget <- prependContent(
-  scaled_widget,
+# Use prependContent to add custom full-screen CSS
+full_screen_widget <- prependContent(
+  full_screen_widget,
   htmltools::tags$style(
-    "html, body {width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;}
-     .grViz {
-       width: 100vw !important; 
-       height: 100vh !important; 
-       transform: scale(0.8); /* Adjust scale here */
-       transform-origin: 0 0;  /* Ensure scaling from top-left corner */
-     }"
+    "html, body {width: 98%; height: 100%; margin: 10; padding: 0; overflow: hidden;}
+     .grViz {width: 100% !important; height: 100vh !important;}"
   )
 )
 
-# Save the widget with scaling to fit the window
-saveWidget(scaled_widget, file = "academic_genealogy.html", selfcontained = TRUE)
+# Save the widget with full-screen capability
+saveWidget(full_screen_widget, file = "academic_genealogy.html", selfcontained = TRUE)
