@@ -1,8 +1,7 @@
 library(DiagrammeR)
 library(htmlwidgets)
+library(htmltools) 
 
-
-genealogy_diagram
 genealogy_diagram <- grViz("
   digraph hierarchical_diagram {
 
@@ -10,7 +9,7 @@ genealogy_diagram <- grViz("
     node [fontname = Helvetica, shape = box, style = 'filled,rounded', penwidth = 2, fontsize=6, margin='0.03,0.01']
     
     # Graph attributes for spacing
-    graph [ranksep=.5, nodesep=0.1, size='10,10']
+    graph [ranksep=.5, nodesep=0.1]
     
    # Level 1: Scientific Legends
     Pinchot [label = 'Gifford Pinchot\nSilviculture\nAmerican Forestry', 
@@ -221,5 +220,17 @@ Jenks -> Werdel
 
 genealogy_diagram
 
-# Export as an HTML file using htmlwidgets
-htmlwidgets::saveWidget(genealogy_diagram, file = "academic_genealogy.html", selfcontained = TRUE)
+# Modify widget to fit 100% width and height using custom CSS
+full_screen_widget <- genealogy_diagram
+full_screen_widget
+# Use prependContent to add custom full-screen CSS
+full_screen_widget <- prependContent(
+  full_screen_widget,
+  htmltools::tags$style(
+    "html, body {width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;}
+     .grViz {width: 100% !important; height: 100vh !important;}"
+  )
+)
+
+# Save the widget with full-screen capability
+saveWidget(full_screen_widget, file = "academic_genealogy.html", selfcontained = TRUE)
