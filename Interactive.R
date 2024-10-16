@@ -220,17 +220,22 @@ Jenks -> Werdel
 
 genealogy_diagram
 
-# Modify widget to fit 100% width and height using custom CSS
-full_screen_widget <- genealogy_diagram
-full_screen_widget
-# Use prependContent to add custom full-screen CSS
-full_screen_widget <- prependContent(
-  full_screen_widget,
+# Modify widget to scale based on viewport using CSS
+scaled_widget <- genealogy_diagram
+
+# Use prependContent to add custom scaling CSS to fit within window
+scaled_widget <- prependContent(
+  scaled_widget,
   htmltools::tags$style(
     "html, body {width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;}
-     .grViz {width: 100% !important; height: 100vh !important;}"
+     .grViz {
+       width: 100vw !important; 
+       height: 100vh !important; 
+       transform: scale(0.8); /* Adjust scale here */
+       transform-origin: 0 0;  /* Ensure scaling from top-left corner */
+     }"
   )
 )
 
-# Save the widget with full-screen capability
-saveWidget(full_screen_widget, file = "academic_genealogy.html", selfcontained = TRUE)
+# Save the widget with scaling to fit the window
+saveWidget(scaled_widget, file = "academic_genealogy.html", selfcontained = TRUE)
